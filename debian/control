@@ -1,0 +1,49 @@
+Source: txzmq
+Section: python
+Priority: optional
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Uploaders: Simon Chopin <chopin.simon@gmail.com>, Nicolas Dandrimont <olasd@debian.org>
+Build-Depends:
+ debhelper (>= 9),
+ python3 (>= 3.3.1-0~),
+ python3-pytest,
+ python-virtualenv,
+ dh-python (>= 1.20131003-1~),
+ python3-twisted-experimental,
+ python3-zmq (>= 13)
+Standards-Version: 3.9.4
+X-Python-Version: >= 3.3
+Homepage: https://github.com/smira/txZMQ
+Vcs-Git: https://github.com/vmarkovtsev/txZMQ.git
+Vcs-Browser: https://github.com/vmarkovtsev/txZMQ
+
+Package: python3-txzmq
+Architecture: all
+Depends:
+ python3-twisted-experimental,
+ python3-zmq (>= 13),
+ ${misc:Depends},
+ ${python:Depends}
+Description: Python module providing ZeroMQ binding for the Twisted framework
+ txZMQ allows one to integrate easily 0MQ sockets into Twisted event loop
+ (reactor).
+ .
+ 0MQ is a high performance asynchronous brokerless messaging library.
+ .
+ Twisted is an event-based framework for internet applications.
+
+
+Package: pypy-txzmq
+Architecture: all
+Depends:
+ pypy-twisted,
+ pypy-zmq (>= 13),
+ ${misc:Depends},
+ ${python:Depends}
+Description: Python module providing ZeroMQ binding for the Twisted framework
+ txZMQ allows one to integrate easily 0MQ sockets into Twisted event loop
+ (reactor).
+ .
+ 0MQ is a high performance asynchronous brokerless messaging library.
+ .
+ Twisted is an event-based framework for internet applications.

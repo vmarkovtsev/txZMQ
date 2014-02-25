@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+export PYBUILD_DESTDIR_python3=debian/python3-txzmq/
+export PYBUILD_DESTDIR_pypy=debian/pypy-txzmq/
+export DH_VERBOSE=1
+
+%:
+	dh $@ --with python3,pypy --buildsystem=pybuild
