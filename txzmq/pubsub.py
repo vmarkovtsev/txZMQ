@@ -12,7 +12,7 @@ class ZmqPubConnection(ZmqConnection):
     """
     socketType = constants.PUB
 
-    def publish(self, message, tag=''):
+    def publish(self, message):
         """
         Publish `message` with specified `tag`.
 
@@ -21,7 +21,7 @@ class ZmqPubConnection(ZmqConnection):
         :param tag: message tag
         :type tag: str
         """
-        self.send(tag + '\0' + message)
+        self.send(message)
 
 
 class ZmqSubConnection(ZmqConnection):
@@ -54,30 +54,3 @@ class ZmqSubConnection(ZmqConnection):
         :type tag: str
         """
         self.socket.set(constants.UNSUBSCRIBE, tag)
-
-    def messageReceived(self, message):
-        """
-        Overridden from :class:`ZmqConnection` to process
-        and unframe incoming messages.
-
-        All parsed messages are passed to :meth:`gotMessage`.
-
-        :param message: message data
-        """
-        if len(message) == 2:
-            # compatibility receiving of tag as first part
-            # of multi-part message
-            self.gotMessage(message[1], message[0])
-        else:
-            self.gotMessage(*reversed(message[0].split('\0', 1)))
-
-    def gotMessage(self, message, tag):
-        """
-        Called on incoming message recevied by subscriber.
-
-        Should be overridden to handle incoming messages.
-
-        :param message: message data
-        :param tag: message tag
-        """
-        raise NotImplementedError(self)

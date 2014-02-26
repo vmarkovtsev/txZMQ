@@ -278,7 +278,7 @@ class ZmqConnection(object):
             message) or just str
         :type message: str or list of str
         """
-        if not hasattr(message, '__iter__'):
+        if isinstance(message, bytes):
             self.socket.send(message, constants.NOBLOCK)
         else:
             for m in message[:-1]:
